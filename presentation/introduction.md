@@ -17,7 +17,6 @@ paginate: true
 # Introduction to Laravel 8
 New experience and tips about Laravel 8
 
-__
 ___
 
 ![width:100px](./image/logo.svg)
@@ -217,6 +216,69 @@ r -> resource
 R -> Request
 ```
 
+---
+<!-- _class: invert -->
+## Routing
+Ada di file `web.php` untuk web, dan `api.php` untuk API.
+
+---
+## Struktur Routing Baru
+```php
+Route::method('/url', [NamaController::class, 'method])->name('nama.route');
+```
+```php
+Route::resource('mainurl', NamaController::class);
+```
+---
+## Struktur Routing
+Jika mempunyai controller resource dan hanya beberapa method yang digunakan
+```php
+Route::resource('mainurl', NamaController::class)->only(['store']);
+```
+---
+## Struktur Routing
+Jika mempunyai controller resource dan mengecualikan method yang tidak digunakan
+```php
+Route::resource('mainurl', NamaController::class)->except(['store']);
+```
+---
+## Struktur Routing
+Group routing
+```php
+Route::prefix('admin')->group(function () {
+  Route::resource('mainurl', NamaController::class);
+   Route::method(
+    '/url',
+    [NamaController::class, 'method])->name('nama.route');
+});
+```
+---
+## Struktur Routing
+Group routing dengan middleware
+```php
+Route::middleware(['auth', 'other'])->group(function () {
+  Route::resource('mainurl', NamaController::class);
+   Route::method(
+    '/url',
+    [NamaController::class, 'method])->name('nama.route');
+});
+```
+---
+<!-- _class: invert -->
+## Middleware
+Middleware bisa dikatakan menjadi gerbang antara user dan sistem. Gerbang ini akan memvalidasi siapa user yang masuk, dan kemana nantinya user diarahkan.
+```bash
+ php artisan make:middleware NamaMiddleware 
+```
+
+---
+## Eloquent
+Eloquent merupakan sebuah object-relational mapper (ORM) yang tugasnya sebagai alat untuk berinteraksi dengan database
+
+---
+![width:100px](./image/logo.svg)
+## Terima Kasih
+Khoerul Umam
 
 
 
